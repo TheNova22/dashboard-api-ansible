@@ -19,6 +19,7 @@ def test_cisco_meraki_devices_camera_video_settings_updateDeviceCameraVideoSetti
     results = jq.compile(query_data[module_fqcn]["query"]).input(final_response).all()
 
     expected = [[{
+        "name": "camera-video-settings-Q234-ABCD-5678",
         "facts": {
         "device_type": "camera",
         "external_rtsp_enabled": True,

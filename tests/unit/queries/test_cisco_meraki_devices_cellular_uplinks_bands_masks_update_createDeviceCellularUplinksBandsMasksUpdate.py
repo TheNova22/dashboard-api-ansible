@@ -23,6 +23,7 @@ def test_cisco_meraki_devices_cellular_uplinks_bands_masks_update_createDeviceCe
     expected = [
         [
             {
+                "name": "cellular-uplinks-bands-Q234-ABCD-5678",
                 "facts": {
                     "device_type": "cellular",
                     "by_slot": [

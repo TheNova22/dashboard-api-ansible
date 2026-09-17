@@ -28,6 +28,7 @@ def test_cisco_meraki_devices_wireless_alternate_management_interface_ipv6_updat
     expected = [
         [
             {
+                "name": "ipv6-address-2001:db8:3c4d:15::1",
                 "facts": {
                     "device_type": "wireless",
                     "protocol": "ipv6",
@@ -42,6 +43,7 @@ def test_cisco_meraki_devices_wireless_alternate_management_interface_ipv6_updat
                 }
             },
             {
+                "name": "ipv6-address-2001:db8:3c4d:15::2",
                 "facts": {
                     "device_type": "wireless",
                     "protocol": "ipv6",

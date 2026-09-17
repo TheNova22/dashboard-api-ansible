@@ -28,6 +28,7 @@ def test_cisco_meraki_devices_cellular_gateway_lan_info_getDeviceCellularGateway
     expected = [
         [
             {
+                "name": "My MG",
                 "facts": {
                     "device_type": "cellular",
                     "device_name": "My MG",

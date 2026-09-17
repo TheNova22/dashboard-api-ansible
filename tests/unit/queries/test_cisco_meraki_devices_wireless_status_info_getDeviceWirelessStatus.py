@@ -28,7 +28,7 @@ def test_cisco_meraki_devices_wireless_status_info_getDeviceWirelessStatus(query
     expected = [
         [
             {
-                "name": "My SSID",
+                "name": "ssid-My SSID-2.4 GHz",
                 "facts": {
                     "device_type": "wireless",
                     "ssid_number": 0,
@@ -46,7 +46,7 @@ def test_cisco_meraki_devices_wireless_status_info_getDeviceWirelessStatus(query
                 }
             },
             {
-                "name": "My SSID",
+                "name": "ssid-My SSID-5 GHz",
                 "facts": {
                     "device_type": "wireless",
                     "ssid_number": 0,

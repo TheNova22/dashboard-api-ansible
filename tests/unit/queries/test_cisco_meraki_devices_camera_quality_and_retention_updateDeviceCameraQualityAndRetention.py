@@ -19,6 +19,7 @@ def test_cisco_meraki_devices_camera_quality_and_retention_updateDeviceCameraQua
     results = jq.compile(query_data[module_fqcn]["query"]).input(final_response).all()
 
     expected = [[{
+        "name": "camera-quality-1234",
         "facts": {
         "device_type": "camera",
         "profile_id": "1234",

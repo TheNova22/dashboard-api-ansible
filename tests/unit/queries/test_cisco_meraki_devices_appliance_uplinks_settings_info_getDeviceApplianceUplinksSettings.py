@@ -28,6 +28,7 @@ def test_cisco_meraki_devices_appliance_uplinks_settings_info_getDeviceAppliance
     expected = [
         [
             {
+                "name": "appliance-uplinks-settings-Q234-ABCD-5678",
                 "facts": {
                     "device_type": "appliance",
                     "wan1": {

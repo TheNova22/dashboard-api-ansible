@@ -28,6 +28,7 @@ def test_cisco_meraki_devices_cellular_gateway_port_forwarding_rules_info_getDev
     expected = [
         [
             {
+                "name": "cellular-port-forwarding-rules-Q234-ABCD-5678",
                 "facts": {
                     "device_type": "cellular",
                     "rules": [

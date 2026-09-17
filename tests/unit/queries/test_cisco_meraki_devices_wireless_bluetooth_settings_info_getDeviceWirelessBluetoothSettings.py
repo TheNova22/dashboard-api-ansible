@@ -28,6 +28,7 @@ def test_cisco_meraki_devices_wireless_bluetooth_settings_info_getDeviceWireless
     expected = [
         [
             {
+                "name": "bluetooth-settings-Q2FV-DJ6J-4QHD",
                 "facts": {
                     "device_type": "wireless",
                     "uuid": "00000000-0000-0000-0000-000000000000",

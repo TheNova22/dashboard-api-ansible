@@ -19,6 +19,7 @@ def test_cisco_meraki_devices_camera_sense_info_getDeviceCameraSense(query_data,
     results = jq.compile(query_data[module_fqcn]["query"]).input(final_response).all()
 
     expected = [[{
+        "name": "camera-sense-Q234-ABCD-5678",
         "facts": {
         "device_type": "camera",
         "sense_enabled": True,

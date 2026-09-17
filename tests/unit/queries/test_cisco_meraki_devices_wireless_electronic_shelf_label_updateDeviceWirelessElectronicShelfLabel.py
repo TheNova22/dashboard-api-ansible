@@ -28,6 +28,7 @@ def test_cisco_meraki_devices_wireless_electronic_shelf_label_updateDeviceWirele
     expected = [
         [
             {
+                "name": "localhost:700",
                 "canonical_facts": {
                     "ansible_product_serial": "Q234-ABCD-5678",
                     "hostname": "localhost:700"

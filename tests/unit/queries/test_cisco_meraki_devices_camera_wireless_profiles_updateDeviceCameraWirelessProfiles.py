@@ -19,6 +19,7 @@ def test_cisco_meraki_devices_camera_wireless_profiles_updateDeviceCameraWireles
     results = jq.compile(query_data[module_fqcn]["query"]).input(final_response).all()
 
     expected = [[{
+        "name": "camera-wireless-profiles-Q234-ABCD-5678",
         "facts": {
         "device_type": "camera",
         "primary": "profile-001",

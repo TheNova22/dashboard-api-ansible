@@ -19,6 +19,7 @@ def test_cisco_meraki_devices_sensor_commands_info_getDeviceSensorCommands(query
     results = jq.compile(query_data[module_fqcn]["query"]).input(final_response).all()
 
     expected = [[{
+        "name": "sensor-commands-Q234-ABCD-5678",
         "facts": {
             "device_type": "sensor",
             "commands": [

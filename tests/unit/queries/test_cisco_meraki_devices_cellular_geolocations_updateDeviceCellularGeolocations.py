@@ -23,6 +23,7 @@ def test_cisco_meraki_devices_cellular_geolocations_updateDeviceCellularGeolocat
     expected = [
         [
             {
+                "name": "cellular-geolocations-Q234-ABCD-5678",
                 "facts": {
                     "device_type": "cellular",
                     "enabled": True

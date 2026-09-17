@@ -19,6 +19,7 @@ def test_cisco_meraki_devices_sensor_commands_createDeviceSensorCommand(query_da
     results = jq.compile(query_data[module_fqcn]["query"]).input(final_response).all()
 
     expected = [[{
+        "name": "sensor-command-cmd-001",
         "facts": {
             "device_type": "sensor",
             "command_id": "cmd-001",

@@ -28,6 +28,7 @@ def test_cisco_meraki_devices_wireless_radio_settings_info_getDeviceWirelessRadi
     expected = [
         [
             {
+                "name": "radio-settings-Q234-ABCD-5678",
                 "canonical_facts": {
                     "ansible_product_serial": "Q234-ABCD-5678"
                 },

@@ -1538,6 +1538,7 @@ cisco.meraki.devices_wireless_bluetooth_settings_info:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: ("bluetooth-settings-" + $inv.serial),
           facts: {
             device_type: "wireless",
             uuid: .uuid,
@@ -1559,6 +1560,7 @@ cisco.meraki.devices_wireless_bluetooth_settings:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: ("bluetooth-settings-" + $inv.serial),
           facts: {
             device_type: "wireless",
             uuid: .uuid,
@@ -1580,6 +1582,7 @@ cisco.meraki.devices_wireless_alternate_management_interface_ipv6:
       (.meraki_response.addresses // []) |
       map(
         {
+          name: ("ipv6-address-" + .address),
           facts: {
             device_type: "wireless",
             protocol: .protocol,
@@ -1604,6 +1607,7 @@ cisco.meraki.devices_wireless_connection_stats_info:
     if .meraki_response then
       .meraki_response |
       [{
+        name: ("connection-stats-" + .serial),
         canonical_facts: {
           ansible_product_serial: .serial
         },
@@ -1627,6 +1631,7 @@ cisco.meraki.devices_wireless_electronic_shelf_label:
     if .meraki_response then
       .meraki_response |
       [{
+        name: (.hostname // ("electronic-shelf-label-" + (.apEslId | tostring))),
         canonical_facts: {
           ansible_product_serial: .serial,
           hostname: (.hostname // "")
@@ -1649,6 +1654,7 @@ cisco.meraki.devices_wireless_electronic_shelf_label_info:
     if .meraki_response then
       .meraki_response |
       [{
+        name: (.hostname // ("electronic-shelf-label-" + (.apEslId | tostring))),
         canonical_facts: {
           ansible_product_serial: .serial,
           hostname: (.hostname // "")
@@ -1671,6 +1677,7 @@ cisco.meraki.devices_wireless_latency_stats_info:
     if .meraki_response then
       .meraki_response |
       [{
+        name: ("latency-stats-" + .serial),
         canonical_facts: {
           ansible_product_serial: .serial
         },
@@ -1693,6 +1700,7 @@ cisco.meraki.devices_wireless_radio_settings:
     if .meraki_response then
       .meraki_response |
       [{
+        name: ("radio-settings-" + .serial),
         canonical_facts: {
           ansible_product_serial: .serial
         },
@@ -1719,6 +1727,7 @@ cisco.meraki.devices_wireless_radio_settings_info:
     if .meraki_response then
       .meraki_response |
       [{
+        name: ("radio-settings-" + .serial),
         canonical_facts: {
           ansible_product_serial: .serial
         },
@@ -1747,7 +1756,7 @@ cisco.meraki.devices_wireless_status_info:
       (.meraki_response.basicServiceSets // []) |
       map(
         {
-          name: .ssidName,
+          name: ("ssid-" + .ssidName + "-" + (.band // .bssid // "unknown")),
           facts: {
             device_type: "wireless",
             ssid_number: .ssidNumber,
@@ -1775,6 +1784,7 @@ cisco.meraki.devices_wireless_zigbee_enrollments:
     if .meraki_response then
       .meraki_response |
       [{
+        name: ("zigbee-enrollment-" + .request.serial),
         canonical_facts: {
           ansible_product_serial: .request.serial
         },
@@ -1793,6 +1803,7 @@ cisco.meraki.devices_wireless_zigbee_enrollments_info:
     if .meraki_response then
       .meraki_response as $parent |
       [{
+        name: ("zigbee-enrollment-" + ($parent.enrollmentId | tostring)),
         canonical_facts: {
           ansible_product_serial: $parent.request.serial
         },
@@ -1826,6 +1837,7 @@ cisco.meraki.devices_appliance_radio_settings_info:
     if .meraki_response then
       .meraki_response |
       [{
+        name: ("appliance-radio-settings-" + .serial),
         canonical_facts: {
           ansible_product_serial: .serial
         },
@@ -1852,6 +1864,7 @@ cisco.meraki.devices_appliance_radio_settings:
     if .meraki_response then
       .meraki_response |
       [{
+        name: ("appliance-radio-settings-" + .serial),
         canonical_facts: {
           ansible_product_serial: .serial
         },
@@ -1879,6 +1892,7 @@ cisco.meraki.devices_appliance_performance_info:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: ("appliance-performance-" + $inv.serial),
           facts: {
             device_type: "appliance",
             perf_score: .perfScore
@@ -1898,6 +1912,7 @@ cisco.meraki.devices_appliance_uplinks_settings_info:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: ("appliance-uplinks-settings-" + $inv.serial),
           facts: {
             device_type: "appliance",
             wan1: {
@@ -1926,6 +1941,7 @@ cisco.meraki.devices_appliance_uplinks_settings:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: ("appliance-uplinks-settings-" + $inv.serial),
           facts: {
             device_type: "appliance",
             wan1: {
@@ -1954,6 +1970,7 @@ cisco.meraki.devices_appliance_vmx_authentication_token:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: ("vmx-authentication-token-" + $inv.serial),
           facts: {
             device_type: "appliance",
             token: .token,
@@ -1974,6 +1991,7 @@ cisco.meraki.devices_cellular_sims_info:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: ("cellular-sims-" + $inv.serial),
           facts: {
             device_type: "cellular",
             sims: ((.sims // []) | map({slot: .slot, iccid: .iccid, is_primary: .isPrimary, status: .status})),
@@ -1995,6 +2013,7 @@ cisco.meraki.devices_cellular_sims:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: ("cellular-sims-" + $inv.serial),
           facts: {
             device_type: "cellular",
             sims: ((.sims // []) | map({slot: .slot, iccid: .iccid, is_primary: .isPrimary, status: .status})),
@@ -2016,6 +2035,7 @@ cisco.meraki.devices_cellular_gateway_lan_info:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: (.deviceName // ("cellular-gateway-lan-" + $inv.serial)),
           facts: {
             device_type: "cellular",
             device_name: .deviceName,
@@ -2039,6 +2059,7 @@ cisco.meraki.devices_cellular_gateway_lan:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: (.deviceName // ("cellular-gateway-lan-" + $inv.serial)),
           facts: {
             device_type: "cellular",
             device_name: .deviceName,
@@ -2061,6 +2082,7 @@ cisco.meraki.devices_cellular_gateway_port_forwarding_rules_info:
     if .meraki_response then
       .invocation as $inv |
       [{
+        name: ("cellular-port-forwarding-rules-" + $inv.serial),
         facts: {
           device_type: "cellular",
           rules: ((.meraki_response | if type == "array" then . else [.] end) | map({name: .name, lan_ip: .lanIp, public_port: .publicPort, local_port: .localPort, protocol: .protocol, access: .access, allowed_ips: (.allowedIps // [])}))
@@ -2079,6 +2101,7 @@ cisco.meraki.devices_cellular_gateway_port_forwarding_rules:
     if .meraki_response then
       .invocation as $inv |
       [{
+        name: ("cellular-port-forwarding-rules-" + $inv.serial),
         facts: {
           device_type: "cellular",
           rules: ((.meraki_response | if type == "array" then . else [.] end) | map({name: .name, lan_ip: .lanIp, public_port: .publicPort, local_port: .localPort, protocol: .protocol, access: .access, allowed_ips: (.allowedIps // [])}))
@@ -2098,6 +2121,7 @@ cisco.meraki.devices_cellular_geolocations:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: ("cellular-geolocations-" + $inv.serial),
           facts: {
             device_type: "cellular",
             enabled: .enabled
@@ -2117,6 +2141,7 @@ cisco.meraki.devices_cellular_uplinks_bands_masks_update:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: ("cellular-uplinks-bands-" + $inv.serial),
           facts: {
             device_type: "cellular",
             by_slot: (.bySlot // []) | map({
@@ -2144,6 +2169,7 @@ cisco.meraki.devices_sensor_commands:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: ("sensor-command-" + (.commandId | tostring)),
           facts: {
             device_type: "sensor",
             command_id: .commandId,
@@ -2167,6 +2193,7 @@ cisco.meraki.devices_sensor_commands_info:
     if .meraki_response then
       .invocation as $inv |
       [{
+        name: ("sensor-commands-" + $inv.serial),
         facts: {
           device_type: "sensor",
           commands: ((.meraki_response | if type == "array" then . else [.] end) | map({
@@ -2193,6 +2220,7 @@ cisco.meraki.devices_sensor_relationships:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: ("sensor-relationships-" + $inv.serial),
           facts: {
             device_type: "sensor",
             related_devices: ((.relatedDevices // []) | map({
@@ -2215,6 +2243,7 @@ cisco.meraki.devices_sensor_relationships_info:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: ("sensor-relationships-" + $inv.serial),
           facts: {
             device_type: "sensor",
             related_devices: ((.relatedDevices // []) | map({
@@ -2237,6 +2266,7 @@ cisco.meraki.devices_camera_clip_info:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: ("camera-clip-" + $inv.serial),
           facts: {
             device_type: "camera",
             url: .url,
@@ -2257,6 +2287,7 @@ cisco.meraki.devices_camera_analytics_live_info:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: ("camera-analytics-live-" + $inv.serial),
           facts: {
             device_type: "camera",
             ts: .ts,
@@ -2277,6 +2308,7 @@ cisco.meraki.devices_camera_custom_analytics:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: ("camera-analytics-" + (.artifactId | tostring)),
           facts: {
             device_type: "camera",
             enabled: .enabled,
@@ -2298,6 +2330,7 @@ cisco.meraki.devices_camera_custom_analytics_info:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: ("camera-analytics-" + (.artifactId | tostring)),
           facts: {
             device_type: "camera",
             enabled: .enabled,
@@ -2319,6 +2352,7 @@ cisco.meraki.devices_camera_generate_snapshot:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: ("camera-snapshot-" + $inv.serial),
           facts: {
             device_type: "camera",
             url: .url,
@@ -2339,6 +2373,7 @@ cisco.meraki.devices_camera_quality_and_retention:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: ("camera-quality-" + (.profileId | tostring)),
           facts: {
             device_type: "camera",
             profile_id: .profileId,
@@ -2364,6 +2399,7 @@ cisco.meraki.devices_camera_quality_and_retention_info:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: ("camera-quality-" + (.profileId | tostring)),
           facts: {
             device_type: "camera",
             profile_id: .profileId,
@@ -2389,6 +2425,7 @@ cisco.meraki.devices_camera_sense:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: ("camera-sense-" + $inv.serial),
           facts: {
             device_type: "camera",
             sense_enabled: .senseEnabled,
@@ -2412,6 +2449,7 @@ cisco.meraki.devices_camera_sense_info:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: ("camera-sense-" + $inv.serial),
           facts: {
             device_type: "camera",
             sense_enabled: .senseEnabled,
@@ -2435,6 +2473,7 @@ cisco.meraki.devices_camera_video_link_info:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: ("camera-video-link-" + $inv.serial),
           facts: {
             device_type: "camera",
             url: .url,
@@ -2455,6 +2494,7 @@ cisco.meraki.devices_camera_video_settings:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: ("camera-video-settings-" + $inv.serial),
           facts: {
             device_type: "camera",
             external_rtsp_enabled: .externalRtspEnabled,
@@ -2475,6 +2515,7 @@ cisco.meraki.devices_camera_video_settings_info:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: ("camera-video-settings-" + $inv.serial),
           facts: {
             device_type: "camera",
             external_rtsp_enabled: .externalRtspEnabled,
@@ -2495,6 +2536,7 @@ cisco.meraki.devices_camera_wireless_profiles:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: ("camera-wireless-profiles-" + $inv.serial),
           facts: {
             device_type: "camera",
             primary: .primary,
@@ -2516,6 +2558,7 @@ cisco.meraki.devices_camera_wireless_profiles_info:
       .invocation as $inv |
       .meraki_response |
       [({
+          name: ("camera-wireless-profiles-" + $inv.serial),
           facts: {
             device_type: "camera",
             primary: .primary,

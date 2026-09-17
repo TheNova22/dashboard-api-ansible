@@ -28,6 +28,7 @@ def test_cisco_meraki_devices_wireless_latency_stats_info_getDeviceWirelessLaten
     expected = [
         [
             {
+                "name": "latency-stats-Q2JC-2MJM-FHRD",
                 "canonical_facts": {
                     "ansible_product_serial": "Q2JC-2MJM-FHRD"
                 },

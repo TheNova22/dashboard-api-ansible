@@ -28,6 +28,7 @@ def test_cisco_meraki_devices_appliance_performance_info_getDeviceAppliancePerfo
     expected = [
         [
             {
+                "name": "appliance-performance-Q234-ABCD-5678",
                 "facts": {
                     "device_type": "appliance",
                     "perf_score": 88

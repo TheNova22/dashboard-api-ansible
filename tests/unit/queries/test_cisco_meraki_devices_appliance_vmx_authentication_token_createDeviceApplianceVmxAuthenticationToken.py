@@ -28,6 +28,7 @@ def test_cisco_meraki_devices_appliance_vmx_authentication_token_createDeviceApp
     expected = [
         [
             {
+                "name": "vmx-authentication-token-Q234-ABCD-5678",
                 "facts": {
                     "device_type": "appliance",
                     "token": "abc123xyz",

@@ -28,6 +28,7 @@ def test_cisco_meraki_devices_appliance_radio_settings_updateDeviceApplianceRadi
     expected = [
         [
             {
+                "name": "appliance-radio-settings-Q234-ABCD-5678",
                 "canonical_facts": {
                     "ansible_product_serial": "Q234-ABCD-5678"
                 },

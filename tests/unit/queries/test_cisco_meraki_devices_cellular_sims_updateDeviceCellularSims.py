@@ -28,6 +28,7 @@ def test_cisco_meraki_devices_cellular_sims_updateDeviceCellularSims(query_data,
     expected = [
         [
             {
+                "name": "cellular-sims-Q234-ABCD-5678",
                 "facts": {
                     "device_type": "cellular",
                     "sims": [

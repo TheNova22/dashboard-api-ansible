@@ -19,6 +19,7 @@ def test_cisco_meraki_devices_camera_custom_analytics_updateDeviceCameraCustomAn
     results = jq.compile(query_data[module_fqcn]["query"]).input(final_response).all()
 
     expected = [[{
+        "name": "camera-analytics-artifact-001",
         "facts": {
         "device_type": "camera",
         "enabled": True,

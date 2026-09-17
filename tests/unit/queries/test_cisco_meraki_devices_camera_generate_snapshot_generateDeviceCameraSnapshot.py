@@ -19,6 +19,7 @@ def test_cisco_meraki_devices_camera_generate_snapshot_generateDeviceCameraSnaps
     results = jq.compile(query_data[module_fqcn]["query"]).input(final_response).all()
 
     expected = [[{
+        "name": "camera-snapshot-Q234-ABCD-5678",
         "facts": {
         "device_type": "camera",
         "url": "https://example.com/snapshot.jpg",

@@ -19,6 +19,7 @@ def test_cisco_meraki_devices_camera_clip_info_clipDeviceCamera(query_data, load
     results = jq.compile(query_data[module_fqcn]["query"]).input(final_response).all()
 
     expected = [[{
+        "name": "camera-clip-Q2FV-DJ6J-4QHD",
         "facts": {
         "device_type": "camera",
         "url": "https://example.com/clip.mp4",

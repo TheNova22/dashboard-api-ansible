@@ -19,6 +19,7 @@ def test_cisco_meraki_devices_camera_video_link_info_getDeviceCameraVideoLink(qu
     results = jq.compile(query_data[module_fqcn]["query"]).input(final_response).all()
 
     expected = [[{
+        "name": "camera-video-link-Q234-ABCD-5678",
         "facts": {
         "device_type": "camera",
         "url": "https://n123.meraki.com/cameras/#uuid=abc123",
