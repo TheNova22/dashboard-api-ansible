@@ -48,3 +48,18 @@ def test_cisco_meraki_devices_wireless_connection_stats_info_getDeviceWirelessCo
 
     # Assert results match expected output
     assert results == expected, f"Query results do not match expected output for {method_name}"
+
+
+def test_cisco_meraki_devices_wireless_connection_stats_info_missing_stats(query_data):
+    module_fqcn = "cisco.meraki.devices_wireless_connection_stats_info"
+    response = {"meraki_response": {"serial": "Q234-ABCD-5678"}}
+    results = jq.compile(query_data[module_fqcn]["query"]).input(response).all()
+    expected = [[{
+        "name": "connection-stats-Q234-ABCD-5678",
+        "canonical_facts": {"ansible_product_serial": "Q234-ABCD-5678"},
+        "facts": {
+            "device_type": "wireless",
+            "connection_stats": {"assoc": None, "auth": None, "dhcp": None, "dns": None, "success": None},
+        },
+    }]]
+    assert results == expected

@@ -23,9 +23,10 @@ def test_cisco_meraki_devices_wireless_zigbee_enrollments_info_getDeviceWireless
     expected = [
         [
             {
-                    "name": "zigbee-enrollment-1234",
-                    "canonical_facts": {
-                    "ansible_product_serial": "Q234-ABCD-5678"
+                "name": "zigbee-enrollment-1234",
+                "canonical_facts": {
+                    "ansible_product_serial": "Q234-ABCD-5678",
+                    "enrollment_id": "1234"
                 },
                 "facts": {
                     "device_type": "wireless",
@@ -63,3 +64,40 @@ def test_cisco_meraki_devices_wireless_zigbee_enrollments_info_getDeviceWireless
     ]
 
     assert results == expected, f"Query results do not match expected output for {method_name}"
+
+
+def test_cisco_meraki_devices_wireless_zigbee_enrollments_info_missing_door_lock_network(query_data):
+    module_fqcn = "cisco.meraki.devices_wireless_zigbee_enrollments_info"
+    response = {
+        "meraki_response": {
+            "enrollmentId": "1234",
+            "request": {"serial": "Q234-ABCD-5678"},
+            "doorLocks": [{"doorLockId": "1"}],
+        },
+    }
+    results = jq.compile(query_data[module_fqcn]["query"]).input(response).all()
+    expected = [[{
+        "name": "zigbee-enrollment-1234",
+        "canonical_facts": {
+            "ansible_product_serial": "Q234-ABCD-5678",
+            "enrollment_id": "1234",
+        },
+        "facts": {
+            "device_type": "wireless",
+            "enrollment_id": "1234",
+            "enrollment_status": None,
+            "door_locks": [{
+                "door_lock_id": "1",
+                "name": "door-lock-1",
+                "short_id": None,
+                "eui64": None,
+                "lqi": None,
+                "rssi": None,
+                "status": None,
+                "enrolled_at": None,
+                "last_seen_at": None,
+                "network": {"id": "", "name": ""},
+            }],
+        },
+    }]]
+    assert results == expected

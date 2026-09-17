@@ -28,9 +28,10 @@ def test_cisco_meraki_devices_wireless_zigbee_enrollments_createDeviceWirelessZi
     expected = [
         [
             {
-                "name": "zigbee-enrollment-Q234-ABCD-5678",
+                "name": "zigbee-enrollment-1234",
                 "canonical_facts": {
-                    "ansible_product_serial": "Q234-ABCD-5678"
+                    "ansible_product_serial": "Q234-ABCD-5678",
+                    "enrollment_id": "1234"
                 },
                 "facts": {
                     "device_type": "wireless",

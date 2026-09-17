@@ -1579,25 +1579,23 @@ cisco.meraki.devices_wireless_alternate_management_interface_ipv6:
   query: >-
     if .meraki_response then
       .invocation as $inv |
-      (.meraki_response.addresses // []) |
-      map(
-        {
-          name: ("ipv6-address-" + .address),
-          facts: {
-            device_type: "wireless",
+      [({
+        name: ("wireless-ipv6-" + $inv.serial),
+        facts: {
+          device_type: "wireless",
+          addresses: ((.meraki_response.addresses // []) | map({
             protocol: .protocol,
             assignment_mode: .assignmentMode,
             address: .address,
             gateway: .gateway,
             prefix: .prefix,
-            nameservers: (.nameservers.addresses // [])
-          }
-        } +
-        if $inv.serial
-        then {canonical_facts: {ansible_product_serial: $inv.serial}}
-        else {}
-        end
-      )
+            nameservers: (((.nameservers // {}).addresses) // [])
+          }))
+        }
+      } + if $inv.serial
+      then {canonical_facts: {ansible_product_serial: $inv.serial}}
+      else {}
+      end)]
     else []
     end
 
@@ -1614,11 +1612,11 @@ cisco.meraki.devices_wireless_connection_stats_info:
         facts: {
           device_type: "wireless",
           connection_stats: {
-            assoc: .connectionStats.assoc,
-            auth: .connectionStats.auth,
-            dhcp: .connectionStats.dhcp,
-            dns: .connectionStats.dns,
-            success: .connectionStats.success
+            assoc: (((.connectionStats // {}).assoc) // null),
+            auth: (((.connectionStats // {}).auth) // null),
+            dhcp: (((.connectionStats // {}).dhcp) // null),
+            dns: (((.connectionStats // {}).dns) // null),
+            success: (((.connectionStats // {}).success) // null)
           }
         }
       }]
@@ -1684,10 +1682,10 @@ cisco.meraki.devices_wireless_latency_stats_info:
         facts: {
           device_type: "wireless",
           latency_stats: {
-            background_traffic_avg: .latencyStats.backgroundTraffic.avg,
-            best_effort_traffic_avg: .latencyStats.bestEffortTraffic.avg,
-            video_traffic_avg: .latencyStats.videoTraffic.avg,
-            voice_traffic_avg: .latencyStats.voiceTraffic.avg
+            background_traffic_avg: (((.latencyStats // {}).backgroundTraffic // {}).avg // null),
+            best_effort_traffic_avg: (((.latencyStats // {}).bestEffortTraffic // {}).avg // null),
+            video_traffic_avg: (((.latencyStats // {}).videoTraffic // {}).avg // null),
+            voice_traffic_avg: (((.latencyStats // {}).voiceTraffic // {}).avg // null)
           }
         }
       }]
@@ -1708,13 +1706,13 @@ cisco.meraki.devices_wireless_radio_settings:
           device_type: "wireless",
           rf_profile_id: .rfProfileId,
           two_four_ghz_settings: {
-            channel: .twoFourGhzSettings.channel,
-            target_power: .twoFourGhzSettings.targetPower
+            channel: (((.twoFourGhzSettings // {}).channel) // null),
+            target_power: (((.twoFourGhzSettings // {}).targetPower) // null)
           },
           five_ghz_settings: {
-            channel: .fiveGhzSettings.channel,
-            channel_width: .fiveGhzSettings.channelWidth,
-            target_power: .fiveGhzSettings.targetPower
+            channel: (((.fiveGhzSettings // {}).channel) // null),
+            channel_width: (((.fiveGhzSettings // {}).channelWidth) // null),
+            target_power: (((.fiveGhzSettings // {}).targetPower) // null)
           }
         }
       }]
@@ -1735,13 +1733,13 @@ cisco.meraki.devices_wireless_radio_settings_info:
           device_type: "wireless",
           rf_profile_id: .rfProfileId,
           two_four_ghz_settings: {
-            channel: .twoFourGhzSettings.channel,
-            target_power: .twoFourGhzSettings.targetPower
+            channel: (((.twoFourGhzSettings // {}).channel) // null),
+            target_power: (((.twoFourGhzSettings // {}).targetPower) // null)
           },
           five_ghz_settings: {
-            channel: .fiveGhzSettings.channel,
-            channel_width: .fiveGhzSettings.channelWidth,
-            target_power: .fiveGhzSettings.targetPower
+            channel: (((.fiveGhzSettings // {}).channel) // null),
+            channel_width: (((.fiveGhzSettings // {}).channelWidth) // null),
+            target_power: (((.fiveGhzSettings // {}).targetPower) // null)
           }
         }
       }]
@@ -1753,13 +1751,13 @@ cisco.meraki.devices_wireless_status_info:
   query: >-
     if .meraki_response then
       .invocation as $inv |
-      (.meraki_response.basicServiceSets // []) |
-      map(
-        {
-          name: ("ssid-" + .ssidName + "-" + (.band // .bssid // "unknown")),
-          facts: {
-            device_type: "wireless",
+      [({
+        name: ("wireless-status-" + $inv.serial),
+        facts: {
+          device_type: "wireless",
+          basic_service_sets: ((.meraki_response.basicServiceSets // []) | map({
             ssid_number: .ssidNumber,
+            ssid_name: .ssidName,
             enabled: .enabled,
             band: .band,
             bssid: .bssid,
@@ -1768,13 +1766,12 @@ cisco.meraki.devices_wireless_status_info:
             power: .power,
             visible: .visible,
             broadcasting: .broadcasting
-          }
-        } +
-        if $inv.serial
-        then {canonical_facts: {ansible_product_serial: $inv.serial}}
-        else {}
-        end
-      )
+          }))
+        }
+      } + if $inv.serial
+      then {canonical_facts: {ansible_product_serial: $inv.serial}}
+      else {}
+      end)]
     else []
     end
 
@@ -1784,9 +1781,10 @@ cisco.meraki.devices_wireless_zigbee_enrollments:
     if .meraki_response then
       .meraki_response |
       [{
-        name: ("zigbee-enrollment-" + .request.serial),
+        name: ("zigbee-enrollment-" + (.enrollmentId | tostring)),
         canonical_facts: {
-          ansible_product_serial: .request.serial
+          ansible_product_serial: .request.serial,
+          enrollment_id: .enrollmentId
         },
         facts: {
           device_type: "wireless",
@@ -1805,7 +1803,8 @@ cisco.meraki.devices_wireless_zigbee_enrollments_info:
       [{
         name: ("zigbee-enrollment-" + ($parent.enrollmentId | tostring)),
         canonical_facts: {
-          ansible_product_serial: $parent.request.serial
+          ansible_product_serial: $parent.request.serial,
+          enrollment_id: $parent.enrollmentId
         },
         facts: {
           device_type: "wireless",
@@ -1822,8 +1821,8 @@ cisco.meraki.devices_wireless_zigbee_enrollments_info:
             enrolled_at: .enrolledAt,
             last_seen_at: .lastSeenAt,
             network: {
-              id: (.network.id // ""),
-              name: (.network.name // "")
+              id: (((.network // {}).id) // ""),
+              name: (((.network // {}).name) // "")
             }
           }))
         }
@@ -1845,13 +1844,13 @@ cisco.meraki.devices_appliance_radio_settings_info:
           device_type: "appliance",
           rf_profile_id: .rfProfileId,
           two_four_ghz_settings: {
-            channel: .twoFourGhzSettings.channel,
-            target_power: .twoFourGhzSettings.targetPower
+            channel: (((.twoFourGhzSettings // {}).channel) // null),
+            target_power: (((.twoFourGhzSettings // {}).targetPower) // null)
           },
           five_ghz_settings: {
-            channel: .fiveGhzSettings.channel,
-            channel_width: .fiveGhzSettings.channelWidth,
-            target_power: .fiveGhzSettings.targetPower
+            channel: (((.fiveGhzSettings // {}).channel) // null),
+            channel_width: (((.fiveGhzSettings // {}).channelWidth) // null),
+            target_power: (((.fiveGhzSettings // {}).targetPower) // null)
           }
         }
       }]
@@ -1872,13 +1871,13 @@ cisco.meraki.devices_appliance_radio_settings:
           device_type: "appliance",
           rf_profile_id: .rfProfileId,
           two_four_ghz_settings: {
-            channel: .twoFourGhzSettings.channel,
-            target_power: .twoFourGhzSettings.targetPower
+            channel: (((.twoFourGhzSettings // {}).channel) // null),
+            target_power: (((.twoFourGhzSettings // {}).targetPower) // null)
           },
           five_ghz_settings: {
-            channel: .fiveGhzSettings.channel,
-            channel_width: .fiveGhzSettings.channelWidth,
-            target_power: .fiveGhzSettings.targetPower
+            channel: (((.fiveGhzSettings // {}).channel) // null),
+            channel_width: (((.fiveGhzSettings // {}).channelWidth) // null),
+            target_power: (((.fiveGhzSettings // {}).targetPower) // null)
           }
         }
       }]
@@ -1916,14 +1915,14 @@ cisco.meraki.devices_appliance_uplinks_settings_info:
           facts: {
             device_type: "appliance",
             wan1: {
-              enabled: .wan1.enabled,
-              vlan_tagging_enabled: .wan1.vlanTagging.enabled,
-              vlan_id: .wan1.vlanTagging.vlanId
+              enabled: (((.wan1 // {}).enabled) // false),
+              vlan_tagging_enabled: ((((.wan1 // {}).vlanTagging // {}).enabled) // false),
+              vlan_id: (((.wan1 // {}).vlanTagging // {}).vlanId // null)
             },
             wan2: {
-              enabled: .wan2.enabled,
-              vlan_tagging_enabled: .wan2.vlanTagging.enabled,
-              vlan_id: .wan2.vlanTagging.vlanId
+              enabled: (((.wan2 // {}).enabled) // false),
+              vlan_tagging_enabled: ((((.wan2 // {}).vlanTagging // {}).enabled) // false),
+              vlan_id: (((.wan2 // {}).vlanTagging // {}).vlanId // null)
             }
           }
         } +
@@ -1945,14 +1944,14 @@ cisco.meraki.devices_appliance_uplinks_settings:
           facts: {
             device_type: "appliance",
             wan1: {
-              enabled: .wan1.enabled,
-              vlan_tagging_enabled: .wan1.vlanTagging.enabled,
-              vlan_id: .wan1.vlanTagging.vlanId
+          enabled: (((.wan1 // {}).enabled) // false),
+          vlan_tagging_enabled: ((((.wan1 // {}).vlanTagging // {}).enabled) // false),
+          vlan_id: (((.wan1 // {}).vlanTagging // {}).vlanId // null)
             },
             wan2: {
-              enabled: .wan2.enabled,
-              vlan_tagging_enabled: .wan2.vlanTagging.enabled,
-              vlan_id: .wan2.vlanTagging.vlanId
+          enabled: (((.wan2 // {}).enabled) // false),
+          vlan_tagging_enabled: ((((.wan2 // {}).vlanTagging // {}).enabled) // false),
+          vlan_id: (((.wan2 // {}).vlanTagging // {}).vlanId // null)
             }
           }
         } +
@@ -1995,7 +1994,7 @@ cisco.meraki.devices_cellular_sims_info:
           facts: {
             device_type: "cellular",
             sims: ((.sims // []) | map({slot: .slot, iccid: .iccid, is_primary: .isPrimary, status: .status})),
-            sim_failover_enabled: .simFailover.enabled,
+            sim_failover_enabled: (((.simFailover // {}).enabled) // false),
             sim_ordering: (.simOrdering // [])
           }
         } +
@@ -2017,7 +2016,7 @@ cisco.meraki.devices_cellular_sims:
           facts: {
             device_type: "cellular",
             sims: ((.sims // []) | map({slot: .slot, iccid: .iccid, is_primary: .isPrimary, status: .status})),
-            sim_failover_enabled: .simFailover.enabled,
+            sim_failover_enabled: (((.simFailover // {}).enabled) // false),
             sim_ordering: (.simOrdering // [])
           }
         } +
@@ -2181,7 +2180,10 @@ cisco.meraki.devices_sensor_commands:
           }
         } +
         if $inv.serial
-        then {canonical_facts: {ansible_product_serial: $inv.serial}}
+        then {canonical_facts: {
+          ansible_product_serial: $inv.serial,
+          command_id: .commandId
+        }}
         else {}
         end)]
     else []
@@ -2317,7 +2319,10 @@ cisco.meraki.devices_camera_custom_analytics:
           }
         } +
         if $inv.serial
-        then {canonical_facts: {ansible_product_serial: $inv.serial}}
+        then {canonical_facts: {
+          ansible_product_serial: $inv.serial,
+          artifact_id: .artifactId
+        }}
         else {}
         end)]
     else []
@@ -2339,7 +2344,10 @@ cisco.meraki.devices_camera_custom_analytics_info:
           }
         } +
         if $inv.serial
-        then {canonical_facts: {ansible_product_serial: $inv.serial}}
+        then {canonical_facts: {
+          ansible_product_serial: $inv.serial,
+          artifact_id: .artifactId
+        }}
         else {}
         end)]
     else []
@@ -2386,7 +2394,10 @@ cisco.meraki.devices_camera_quality_and_retention:
           }
         } +
         if $inv.serial
-        then {canonical_facts: {ansible_product_serial: $inv.serial}}
+        then {canonical_facts: {
+          ansible_product_serial: $inv.serial,
+          profile_id: .profileId
+        }}
         else {}
         end)]
     else []
@@ -2412,7 +2423,10 @@ cisco.meraki.devices_camera_quality_and_retention_info:
           }
         } +
         if $inv.serial
-        then {canonical_facts: {ansible_product_serial: $inv.serial}}
+        then {canonical_facts: {
+          ansible_product_serial: $inv.serial,
+          profile_id: .profileId
+        }}
         else {}
         end)]
     else []
@@ -2431,7 +2445,7 @@ cisco.meraki.devices_camera_sense:
             sense_enabled: .senseEnabled,
             mqtt_broker_id: .mqttBrokerId,
             mqtt_topics: (.mqttTopics // []),
-            audio_detection_enabled: .audioDetection.enabled,
+            audio_detection_enabled: (((.audioDetection // {}).enabled) // false),
             detection_model_id: .detectionModelId
           }
         } +
@@ -2455,7 +2469,7 @@ cisco.meraki.devices_camera_sense_info:
             sense_enabled: .senseEnabled,
             mqtt_broker_id: .mqttBrokerId,
             mqtt_topics: (.mqttTopics // []),
-            audio_detection_enabled: .audioDetection.enabled,
+            audio_detection_enabled: (((.audioDetection // {}).enabled) // false),
             detection_model_id: .detectionModelId
           }
         } +

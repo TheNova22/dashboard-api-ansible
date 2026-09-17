@@ -57,3 +57,15 @@ def test_cisco_meraki_devices_cellular_sims_updateDeviceCellularSims(query_data,
 
     # Assert results match expected output
     assert results == expected, f"Query results do not match expected output for {method_name}"
+
+
+def test_cisco_meraki_devices_cellular_sims_missing_sim_failover(query_data):
+    module_fqcn = "cisco.meraki.devices_cellular_sims"
+    response = {"invocation": {"serial": "Q234-ABCD-5678"}, "meraki_response": {}}
+    results = jq.compile(query_data[module_fqcn]["query"]).input(response).all()
+    expected = [[{
+        "name": "cellular-sims-Q234-ABCD-5678",
+        "facts": {"device_type": "cellular", "sims": [], "sim_failover_enabled": False, "sim_ordering": []},
+        "canonical_facts": {"ansible_product_serial": "Q234-ABCD-5678"},
+    }]]
+    assert results == expected

@@ -29,7 +29,10 @@ def test_cisco_meraki_devices_sensor_commands_createDeviceSensorCommand(query_da
             "completed_at": "2026-08-18T10:00:05Z",
             "errors": []
         },
-        "canonical_facts": {"ansible_product_serial": "Q234-ABCD-5678"}
+        "canonical_facts": {
+            "ansible_product_serial": "Q234-ABCD-5678",
+            "command_id": "cmd-001",
+        }
     }]]
 
     assert results == expected, f"Query results do not match expected output for {method_name}"

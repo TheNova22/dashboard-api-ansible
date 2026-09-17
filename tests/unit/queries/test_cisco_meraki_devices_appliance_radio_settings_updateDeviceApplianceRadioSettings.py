@@ -51,3 +51,19 @@ def test_cisco_meraki_devices_appliance_radio_settings_updateDeviceApplianceRadi
 
     # Assert results match expected output
     assert results == expected, f"Query results do not match expected output for {method_name}"
+
+
+def test_cisco_meraki_devices_appliance_radio_settings_missing_band_settings(query_data):
+    module_fqcn = "cisco.meraki.devices_appliance_radio_settings"
+    response = {"meraki_response": {"serial": "Q234-ABCD-5678"}}
+    results = jq.compile(query_data[module_fqcn]["query"]).input(response).all()
+    expected = [[{
+        "name": "appliance-radio-settings-Q234-ABCD-5678",
+        "canonical_facts": {"ansible_product_serial": "Q234-ABCD-5678"},
+        "facts": {
+            "device_type": "appliance", "rf_profile_id": None,
+            "two_four_ghz_settings": {"channel": None, "target_power": None},
+            "five_ghz_settings": {"channel": None, "channel_width": None, "target_power": None},
+        },
+    }]]
+    assert results == expected

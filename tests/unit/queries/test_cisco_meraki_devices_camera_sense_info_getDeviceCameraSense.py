@@ -34,3 +34,15 @@ def test_cisco_meraki_devices_camera_sense_info_getDeviceCameraSense(query_data,
     }]]
 
     assert results == expected, f"Query results do not match expected output for {method_name}"
+
+
+def test_cisco_meraki_devices_camera_sense_info_missing_audio_detection(query_data):
+    module_fqcn = "cisco.meraki.devices_camera_sense_info"
+    response = {"invocation": {"serial": "Q234-ABCD-5678"}, "meraki_response": {}}
+    results = jq.compile(query_data[module_fqcn]["query"]).input(response).all()
+    expected = [[{
+        "name": "camera-sense-Q234-ABCD-5678",
+        "facts": {"device_type": "camera", "sense_enabled": None, "mqtt_broker_id": None, "mqtt_topics": [], "audio_detection_enabled": False, "detection_model_id": None},
+        "canonical_facts": {"ansible_product_serial": "Q234-ABCD-5678"},
+    }]]
+    assert results == expected

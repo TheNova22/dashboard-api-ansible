@@ -30,8 +30,11 @@ def test_cisco_meraki_devices_camera_custom_analytics_updateDeviceCameraCustomAn
                         "value": 0.5
                 }
         ]
-},
-        "canonical_facts": {"ansible_product_serial": "Q234-ABCD-5678"}
+        },
+        "canonical_facts": {
+                "ansible_product_serial": "Q234-ABCD-5678",
+                "artifact_id": "artifact-001",
+        }
     }]]
 
     assert results == expected, f"Query results do not match expected output for {method_name}"

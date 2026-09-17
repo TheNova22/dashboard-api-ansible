@@ -51,3 +51,19 @@ def test_cisco_meraki_devices_appliance_uplinks_settings_info_getDeviceAppliance
 
     # Assert results match expected output
     assert results == expected, f"Query results do not match expected output for {method_name}"
+
+
+def test_cisco_meraki_devices_appliance_uplinks_settings_info_missing_optional_wan_fields(query_data):
+    module_fqcn = "cisco.meraki.devices_appliance_uplinks_settings_info"
+    response = {"invocation": {"serial": "Q234-ABCD-5678"}, "meraki_response": {"wan1": {"enabled": True}}}
+    results = jq.compile(query_data[module_fqcn]["query"]).input(response).all()
+    expected = [[{
+        "name": "appliance-uplinks-settings-Q234-ABCD-5678",
+        "facts": {
+            "device_type": "appliance",
+            "wan1": {"enabled": True, "vlan_tagging_enabled": False, "vlan_id": None},
+            "wan2": {"enabled": False, "vlan_tagging_enabled": False, "vlan_id": None},
+        },
+        "canonical_facts": {"ansible_product_serial": "Q234-ABCD-5678"},
+    }]]
+    assert results == expected

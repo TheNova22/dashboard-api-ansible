@@ -29,8 +29,11 @@ def test_cisco_meraki_devices_camera_quality_and_retention_info_getDeviceCameraQ
         "audio_recording_enabled": False,
         "restricted_bandwidth_mode_enabled": False,
         "motion_detector_version": 2
-},
-        "canonical_facts": {"ansible_product_serial": "Q234-ABCD-5678"}
+    },
+    "canonical_facts": {
+        "ansible_product_serial": "Q234-ABCD-5678",
+        "profile_id": "1234",
+    }
     }]]
 
     assert results == expected, f"Query results do not match expected output for {method_name}"

@@ -47,3 +47,23 @@ def test_cisco_meraki_devices_wireless_latency_stats_info_getDeviceWirelessLaten
 
     # Assert results match expected output
     assert results == expected, f"Query results do not match expected output for {method_name}"
+
+
+def test_cisco_meraki_devices_wireless_latency_stats_info_missing_stats(query_data):
+    module_fqcn = "cisco.meraki.devices_wireless_latency_stats_info"
+    response = {"meraki_response": {"serial": "Q234-ABCD-5678"}}
+    results = jq.compile(query_data[module_fqcn]["query"]).input(response).all()
+    expected = [[{
+        "name": "latency-stats-Q234-ABCD-5678",
+        "canonical_facts": {"ansible_product_serial": "Q234-ABCD-5678"},
+        "facts": {
+            "device_type": "wireless",
+            "latency_stats": {
+                "background_traffic_avg": None,
+                "best_effort_traffic_avg": None,
+                "video_traffic_avg": None,
+                "voice_traffic_avg": None,
+            },
+        },
+    }]]
+    assert results == expected
