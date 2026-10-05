@@ -34,7 +34,9 @@ def test_cisco_meraki_devices_wireless_zigbee_enrollments_createDeviceWirelessZi
                     "enrollment_id": "1234"
                 },
                 "facts": {
-                    "device_type": "wireless",
+                    "device_type": "wireless_access_point",
+                    "infra_type": "private_cloud",
+                    "infra_bucket": "networking",
                     "enrollment_id": "1234",
                     "status": "complete"
                 }

@@ -33,7 +33,9 @@ def test_cisco_meraki_devices_wireless_latency_stats_info_getDeviceWirelessLaten
                     "ansible_product_serial": "Q2JC-2MJM-FHRD"
                 },
                 "facts": {
-                    "device_type": "wireless",
+                    "device_type": "wireless_access_point",
+                    "infra_type": "private_cloud",
+                    "infra_bucket": "networking",
                     "latency_stats": {
                         "background_traffic_avg": 606.52,
                         "best_effort_traffic_avg": 606.52,
@@ -57,7 +59,9 @@ def test_cisco_meraki_devices_wireless_latency_stats_info_missing_stats(query_da
         "name": "latency-stats-Q234-ABCD-5678",
         "canonical_facts": {"ansible_product_serial": "Q234-ABCD-5678"},
         "facts": {
-            "device_type": "wireless",
+            "device_type": "wireless_access_point",
+            "infra_type": "private_cloud",
+            "infra_bucket": "networking",
             "latency_stats": {
                 "background_traffic_avg": None,
                 "best_effort_traffic_avg": None,

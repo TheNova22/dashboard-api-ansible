@@ -33,7 +33,9 @@ def test_cisco_meraki_devices_wireless_radio_settings_info_getDeviceWirelessRadi
                     "ansible_product_serial": "Q234-ABCD-5678"
                 },
                 "facts": {
-                    "device_type": "wireless",
+                    "device_type": "wireless_access_point",
+                    "infra_type": "private_cloud",
+                    "infra_bucket": "networking",
                     "rf_profile_id": "1234",
                     "two_four_ghz_settings": {
                         "channel": 11,
@@ -61,7 +63,9 @@ def test_cisco_meraki_devices_wireless_radio_settings_info_missing_band_settings
         "name": "radio-settings-Q234-ABCD-5678",
         "canonical_facts": {"ansible_product_serial": "Q234-ABCD-5678"},
         "facts": {
-            "device_type": "wireless", "rf_profile_id": None,
+            "device_type": "wireless_access_point",
+            "infra_type": "private_cloud",
+            "infra_bucket": "networking", "rf_profile_id": None,
             "two_four_ghz_settings": {"channel": None, "target_power": None},
             "five_ghz_settings": {"channel": None, "channel_width": None, "target_power": None},
         },

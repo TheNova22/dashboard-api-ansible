@@ -30,7 +30,9 @@ def test_cisco_meraki_devices_cellular_gateway_port_forwarding_rules_info_getDev
             {
                 "name": "cellular-port-forwarding-rules-Q234-ABCD-5678",
                 "facts": {
-                    "device_type": "cellular",
+                    "device_type": "gateway",
+                    "infra_type": "private_cloud",
+                    "infra_bucket": "networking",
                     "rules": [
                         {
                             "name": "Rule 1",

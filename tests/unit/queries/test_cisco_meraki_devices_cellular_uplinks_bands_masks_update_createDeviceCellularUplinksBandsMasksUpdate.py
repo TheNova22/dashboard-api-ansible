@@ -25,7 +25,9 @@ def test_cisco_meraki_devices_cellular_uplinks_bands_masks_update_createDeviceCe
             {
                 "name": "cellular-uplinks-bands-Q234-ABCD-5678",
                 "facts": {
-                    "device_type": "cellular",
+                    "device_type": "gateway",
+                    "infra_type": "private_cloud",
+                    "infra_bucket": "networking",
                     "by_slot": [
                         {
                             "slot": "sim1",

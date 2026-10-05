@@ -283,14 +283,6 @@ def test_mappings():
             "createDeviceApplianceVmxAuthenticationToken",
         ),
         (
-            "cisco.meraki.devices_cellular_sims_info",
-            "getDeviceCellularSims",
-        ),
-        (
-            "cisco.meraki.devices_cellular_sims",
-            "updateDeviceCellularSims",
-        ),
-        (
             "cisco.meraki.devices_cellular_gateway_lan_info",
             "getDeviceCellularGatewayLan",
         ),

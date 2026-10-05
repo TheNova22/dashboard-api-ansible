@@ -33,7 +33,9 @@ def test_cisco_meraki_devices_wireless_connection_stats_info_getDeviceWirelessCo
                     "ansible_product_serial": "Q234-ABCD-5678"
                 },
                 "facts": {
-                    "device_type": "wireless",
+                    "device_type": "wireless_access_point",
+                    "infra_type": "private_cloud",
+                    "infra_bucket": "networking",
                     "connection_stats": {
                         "assoc": 0,
                         "auth": 1,
@@ -58,7 +60,9 @@ def test_cisco_meraki_devices_wireless_connection_stats_info_missing_stats(query
         "name": "connection-stats-Q234-ABCD-5678",
         "canonical_facts": {"ansible_product_serial": "Q234-ABCD-5678"},
         "facts": {
-            "device_type": "wireless",
+            "device_type": "wireless_access_point",
+            "infra_type": "private_cloud",
+            "infra_bucket": "networking",
             "connection_stats": {"assoc": None, "auth": None, "dhcp": None, "dns": None, "success": None},
         },
     }]]

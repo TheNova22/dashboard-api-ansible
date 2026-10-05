@@ -21,7 +21,9 @@ def test_cisco_meraki_devices_camera_clip_info_clipDeviceCamera(query_data, load
     expected = [[{
         "name": "camera-clip-Q2FV-DJ6J-4QHD",
         "facts": {
-        "device_type": "camera",
+        "device_type": "ip_camera",
+        "infra_type": "private_cloud",
+        "infra_bucket": "monitoring",
         "url": "https://example.com/clip.mp4",
         "expiry": "2026-08-18T12:00:00Z"
 },

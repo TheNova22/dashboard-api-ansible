@@ -33,7 +33,9 @@ def test_cisco_meraki_devices_appliance_radio_settings_updateDeviceApplianceRadi
                     "ansible_product_serial": "Q234-ABCD-5678"
                 },
                 "facts": {
-                    "device_type": "appliance",
+                    "device_type": "sd_wan",
+                    "infra_type": "private_cloud",
+                    "infra_bucket": "networking",
                     "rf_profile_id": "1234",
                     "two_four_ghz_settings": {
                         "channel": 6,
@@ -61,7 +63,9 @@ def test_cisco_meraki_devices_appliance_radio_settings_missing_band_settings(que
         "name": "appliance-radio-settings-Q234-ABCD-5678",
         "canonical_facts": {"ansible_product_serial": "Q234-ABCD-5678"},
         "facts": {
-            "device_type": "appliance", "rf_profile_id": None,
+            "device_type": "sd_wan",
+            "infra_type": "private_cloud",
+            "infra_bucket": "networking", "rf_profile_id": None,
             "two_four_ghz_settings": {"channel": None, "target_power": None},
             "five_ghz_settings": {"channel": None, "channel_width": None, "target_power": None},
         },

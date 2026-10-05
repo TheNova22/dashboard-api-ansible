@@ -21,7 +21,9 @@ def test_cisco_meraki_devices_camera_video_link_info_getDeviceCameraVideoLink(qu
     expected = [[{
         "name": "camera-video-link-Q234-ABCD-5678",
         "facts": {
-        "device_type": "camera",
+        "device_type": "ip_camera",
+        "infra_type": "private_cloud",
+        "infra_bucket": "monitoring",
         "url": "https://n123.meraki.com/cameras/#uuid=abc123",
         "vision_url": "https://vision.meraki.com/abc123"
 },

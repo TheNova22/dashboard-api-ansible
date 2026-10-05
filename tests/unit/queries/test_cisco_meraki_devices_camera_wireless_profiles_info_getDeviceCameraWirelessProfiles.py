@@ -21,7 +21,9 @@ def test_cisco_meraki_devices_camera_wireless_profiles_info_getDeviceCameraWirel
     expected = [[{
         "name": "camera-wireless-profiles-Q234-ABCD-5678",
         "facts": {
-        "device_type": "camera",
+        "device_type": "ip_camera",
+        "infra_type": "private_cloud",
+        "infra_bucket": "monitoring",
         "primary": "profile-001",
         "secondary": "profile-002",
         "backup": "profile-003"

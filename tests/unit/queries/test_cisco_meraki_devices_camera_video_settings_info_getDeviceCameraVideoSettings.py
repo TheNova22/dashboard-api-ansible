@@ -21,7 +21,9 @@ def test_cisco_meraki_devices_camera_video_settings_info_getDeviceCameraVideoSet
     expected = [[{
         "name": "camera-video-settings-Q234-ABCD-5678",
         "facts": {
-        "device_type": "camera",
+        "device_type": "ip_camera",
+        "infra_type": "private_cloud",
+        "infra_bucket": "monitoring",
         "external_rtsp_enabled": True,
         "rtsp_url": "rtsp://10.0.0.1:9000/live"
 },

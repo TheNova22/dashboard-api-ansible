@@ -25,7 +25,9 @@ def test_cisco_meraki_devices_cellular_geolocations_updateDeviceCellularGeolocat
             {
                 "name": "cellular-geolocations-Q234-ABCD-5678",
                 "facts": {
-                    "device_type": "cellular",
+                    "device_type": "gateway",
+                    "infra_type": "private_cloud",
+                    "infra_bucket": "networking",
                     "enabled": True
                 },
                 "canonical_facts": {

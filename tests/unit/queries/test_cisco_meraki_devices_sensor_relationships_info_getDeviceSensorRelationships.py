@@ -21,7 +21,9 @@ def test_cisco_meraki_devices_sensor_relationships_info_getDeviceSensorRelations
     expected = [[{
         "name": "sensor-relationships-Q234-ABCD-5678",
         "facts": {
-            "device_type": "sensor",
+            "device_type": "iot_sensor",
+            "infra_type": "private_cloud",
+            "infra_bucket": "monitoring",
             "related_devices": [
                 {"serial": "Q2GV-ABCD-1111", "product_type": "camera"}
             ]

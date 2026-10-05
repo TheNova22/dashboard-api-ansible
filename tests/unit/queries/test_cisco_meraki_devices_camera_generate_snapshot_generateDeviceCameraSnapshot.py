@@ -21,7 +21,9 @@ def test_cisco_meraki_devices_camera_generate_snapshot_generateDeviceCameraSnaps
     expected = [[{
         "name": "camera-snapshot-Q234-ABCD-5678",
         "facts": {
-        "device_type": "camera",
+        "device_type": "ip_camera",
+        "infra_type": "private_cloud",
+        "infra_bucket": "monitoring",
         "url": "https://example.com/snapshot.jpg",
         "expiry": "2026-08-18T10:05:00Z"
 },

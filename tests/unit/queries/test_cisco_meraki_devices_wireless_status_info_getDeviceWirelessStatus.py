@@ -25,7 +25,9 @@ def test_cisco_meraki_devices_wireless_status_info_getDeviceWirelessStatus(query
             {
                 "name": "wireless-status-Q234-ABCD-5678",
                 "facts": {
-                    "device_type": "wireless",
+                    "device_type": "wireless_access_point",
+                    "infra_type": "private_cloud",
+                    "infra_bucket": "networking",
                     "basic_service_sets": [
                         {
                             "ssid_number": 0,
@@ -73,7 +75,7 @@ def test_cisco_meraki_devices_wireless_status_info_empty_service_sets(query_data
     results = jq.compile(query_data[module_fqcn]["query"]).input(response).all()
     expected = [[{
         "name": "wireless-status-Q234-ABCD-5678",
-        "facts": {"device_type": "wireless", "basic_service_sets": []},
+        "facts": {"device_type": "wireless_access_point", "infra_type": "private_cloud", "infra_bucket": "networking", "basic_service_sets": []},
         "canonical_facts": {"ansible_product_serial": "Q234-ABCD-5678"},
     }]]
     assert results == expected

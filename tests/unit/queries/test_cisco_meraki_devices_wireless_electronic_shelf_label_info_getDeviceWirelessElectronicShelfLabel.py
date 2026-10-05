@@ -34,7 +34,9 @@ def test_cisco_meraki_devices_wireless_electronic_shelf_label_info_getDeviceWire
                     "hostname": "localhost:700"
                 },
                 "facts": {
-                    "device_type": "wireless",
+                    "device_type": "wireless_access_point",
+                    "infra_type": "private_cloud",
+                    "infra_bucket": "networking",
                     "ap_esl_id": 16777216,
                     "channel": "1",
                     "enabled": True,

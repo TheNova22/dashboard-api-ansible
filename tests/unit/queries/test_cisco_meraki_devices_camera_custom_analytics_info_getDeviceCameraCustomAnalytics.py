@@ -21,7 +21,9 @@ def test_cisco_meraki_devices_camera_custom_analytics_info_getDeviceCameraCustom
     expected = [[{
         "name": "camera-analytics-artifact-001",
         "facts": {
-        "device_type": "camera",
+        "device_type": "ip_camera",
+        "infra_type": "private_cloud",
+        "infra_bucket": "monitoring",
         "enabled": True,
         "artifact_id": "artifact-001",
         "parameters": [

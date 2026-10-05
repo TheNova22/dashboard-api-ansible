@@ -21,7 +21,9 @@ def test_cisco_meraki_devices_camera_sense_updateDeviceCameraSense(query_data, l
     expected = [[{
         "name": "camera-sense-Q234-ABCD-5678",
         "facts": {
-        "device_type": "camera",
+        "device_type": "ip_camera",
+        "infra_type": "private_cloud",
+        "infra_bucket": "monitoring",
         "sense_enabled": True,
         "mqtt_broker_id": "broker-001",
         "mqtt_topics": [
@@ -42,7 +44,7 @@ def test_cisco_meraki_devices_camera_sense_missing_audio_detection(query_data):
     results = jq.compile(query_data[module_fqcn]["query"]).input(response).all()
     expected = [[{
         "name": "camera-sense-Q234-ABCD-5678",
-        "facts": {"device_type": "camera", "sense_enabled": None, "mqtt_broker_id": None, "mqtt_topics": [], "audio_detection_enabled": False, "detection_model_id": None},
+        "facts": {"device_type": "ip_camera", "infra_type": "private_cloud", "infra_bucket": "monitoring", "sense_enabled": None, "mqtt_broker_id": None, "mqtt_topics": [], "audio_detection_enabled": False, "detection_model_id": None},
         "canonical_facts": {"ansible_product_serial": "Q234-ABCD-5678"},
     }]]
     assert results == expected

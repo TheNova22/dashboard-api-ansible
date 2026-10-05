@@ -21,7 +21,9 @@ def test_cisco_meraki_devices_camera_quality_and_retention_info_getDeviceCameraQ
     expected = [[{
         "name": "camera-quality-1234",
         "facts": {
-        "device_type": "camera",
+        "device_type": "ip_camera",
+        "infra_type": "private_cloud",
+        "infra_bucket": "monitoring",
         "profile_id": "1234",
         "quality": "Enhanced",
         "resolution": "1280x720",

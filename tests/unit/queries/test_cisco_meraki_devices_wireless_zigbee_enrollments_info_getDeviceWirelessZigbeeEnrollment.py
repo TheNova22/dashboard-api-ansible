@@ -29,7 +29,9 @@ def test_cisco_meraki_devices_wireless_zigbee_enrollments_info_getDeviceWireless
                     "enrollment_id": "1234"
                 },
                 "facts": {
-                    "device_type": "wireless",
+                    "device_type": "wireless_access_point",
+                    "infra_type": "private_cloud",
+                    "infra_bucket": "networking",
                     "enrollment_id": "1234",
                     "enrollment_status": "complete",
                     "door_locks": [
@@ -83,7 +85,9 @@ def test_cisco_meraki_devices_wireless_zigbee_enrollments_info_missing_door_lock
             "enrollment_id": "1234",
         },
         "facts": {
-            "device_type": "wireless",
+            "device_type": "wireless_access_point",
+            "infra_type": "private_cloud",
+            "infra_bucket": "networking",
             "enrollment_id": "1234",
             "enrollment_status": None,
             "door_locks": [{

@@ -30,7 +30,9 @@ def test_cisco_meraki_devices_appliance_uplinks_settings_info_getDeviceAppliance
             {
                 "name": "appliance-uplinks-settings-Q234-ABCD-5678",
                 "facts": {
-                    "device_type": "appliance",
+                    "device_type": "sd_wan",
+                    "infra_type": "private_cloud",
+                    "infra_bucket": "networking",
                     "wan1": {
                         "enabled": True,
                         "vlan_tagging_enabled": False,
@@ -60,7 +62,9 @@ def test_cisco_meraki_devices_appliance_uplinks_settings_info_missing_optional_w
     expected = [[{
         "name": "appliance-uplinks-settings-Q234-ABCD-5678",
         "facts": {
-            "device_type": "appliance",
+            "device_type": "sd_wan",
+            "infra_type": "private_cloud",
+            "infra_bucket": "networking",
             "wan1": {"enabled": True, "vlan_tagging_enabled": False, "vlan_id": None},
             "wan2": {"enabled": False, "vlan_tagging_enabled": False, "vlan_id": None},
         },

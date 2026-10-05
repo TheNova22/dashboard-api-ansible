@@ -30,7 +30,9 @@ def test_cisco_meraki_devices_wireless_bluetooth_settings_info_getDeviceWireless
             {
                 "name": "bluetooth-settings-Q2FV-DJ6J-4QHD",
                 "facts": {
-                    "device_type": "wireless",
+                    "device_type": "wireless_access_point",
+                    "infra_type": "private_cloud",
+                    "infra_bucket": "networking",
                     "uuid": "00000000-0000-0000-0000-000000000000",
                     "major": 13,
                     "minor": 125

@@ -25,7 +25,9 @@ def test_cisco_meraki_devices_wireless_alternate_management_interface_ipv6_updat
             {
                 "name": "wireless-ipv6-Q2FV-DJ6J-4QHD",
                 "facts": {
-                    "device_type": "wireless",
+                    "device_type": "wireless_access_point",
+                    "infra_type": "private_cloud",
+                    "infra_bucket": "networking",
                     "addresses": [
                         {
                             "protocol": "ipv6",
@@ -72,7 +74,9 @@ def test_cisco_meraki_devices_wireless_alternate_management_interface_ipv6_missi
     expected = [[{
         "name": "wireless-ipv6-Q234-ABCD-5678",
         "facts": {
-            "device_type": "wireless",
+            "device_type": "wireless_access_point",
+            "infra_type": "private_cloud",
+            "infra_bucket": "networking",
             "addresses": [{
                 "protocol": None,
                 "assignment_mode": None,

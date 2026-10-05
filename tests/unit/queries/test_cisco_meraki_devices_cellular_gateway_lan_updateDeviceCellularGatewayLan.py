@@ -30,7 +30,9 @@ def test_cisco_meraki_devices_cellular_gateway_lan_updateDeviceCellularGatewayLa
             {
                 "name": "My MG",
                 "facts": {
-                    "device_type": "cellular",
+                    "device_type": "gateway",
+                    "infra_type": "private_cloud",
+                    "infra_bucket": "networking",
                     "device_name": "My MG",
                     "device_lan_ip": "192.168.0.1",
                     "device_subnet": "192.168.0.0/24",

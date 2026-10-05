@@ -30,7 +30,9 @@ def test_cisco_meraki_devices_appliance_vmx_authentication_token_createDeviceApp
             {
                 "name": "vmx-authentication-token-Q234-ABCD-5678",
                 "facts": {
-                    "device_type": "appliance",
+                    "device_type": "sd_wan",
+                    "infra_type": "private_cloud",
+                    "infra_bucket": "networking",
                     "token": "abc123xyz",
                     "expires_at": "2026-08-18T12:00:00Z"
                 },

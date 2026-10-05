@@ -21,7 +21,9 @@ def test_cisco_meraki_devices_sensor_commands_createDeviceSensorCommand(query_da
     expected = [[{
         "name": "sensor-command-cmd-001",
         "facts": {
-            "device_type": "sensor",
+            "device_type": "iot_sensor",
+            "infra_type": "private_cloud",
+            "infra_bucket": "monitoring",
             "command_id": "cmd-001",
             "operation": "refreshData",
             "status": "completed",
