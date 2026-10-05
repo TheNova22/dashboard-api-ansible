@@ -1,1 +1,1 @@
-{"invocation": {"serial": "Q234-ABCD-5678"}, "meraki_response": {"perfScore": 88}}
+{"invocation": {"module_args": {"serial": "Q234-ABCD-5678"}}, "meraki_response": {"perfScore": 88}}

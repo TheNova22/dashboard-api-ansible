@@ -69,7 +69,7 @@ def test_cisco_meraki_devices_wireless_status_info_empty_service_sets(query_data
     """Missing basicServiceSets produces one device-level result with an empty list."""
     module_fqcn = "cisco.meraki.devices_wireless_status_info"
     response = {
-        "invocation": {"serial": "Q234-ABCD-5678"},
+        "invocation": {"module_args": {"serial": "Q234-ABCD-5678"}},
         "meraki_response": {},
     }
     results = jq.compile(query_data[module_fqcn]["query"]).input(response).all()

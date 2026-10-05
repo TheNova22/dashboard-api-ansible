@@ -57,7 +57,10 @@ def test_cisco_meraki_devices_appliance_uplinks_settings_info_getDeviceAppliance
 
 def test_cisco_meraki_devices_appliance_uplinks_settings_info_missing_optional_wan_fields(query_data):
     module_fqcn = "cisco.meraki.devices_appliance_uplinks_settings_info"
-    response = {"invocation": {"serial": "Q234-ABCD-5678"}, "meraki_response": {"wan1": {"enabled": True}}}
+    response = {
+        "invocation": {"module_args": {"serial": "Q234-ABCD-5678"}},
+        "meraki_response": {"wan1": {"enabled": True}},
+    }
     results = jq.compile(query_data[module_fqcn]["query"]).input(response).all()
     expected = [[{
         "name": "appliance-uplinks-settings-Q234-ABCD-5678",

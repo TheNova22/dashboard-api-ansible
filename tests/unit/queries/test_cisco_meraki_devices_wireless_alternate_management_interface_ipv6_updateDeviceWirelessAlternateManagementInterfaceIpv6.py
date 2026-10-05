@@ -67,7 +67,7 @@ def test_cisco_meraki_devices_wireless_alternate_management_interface_ipv6_missi
     """Missing nameserver objects do not prevent an IPv6 result from being emitted."""
     module_fqcn = "cisco.meraki.devices_wireless_alternate_management_interface_ipv6"
     response = {
-        "invocation": {"serial": "Q234-ABCD-5678"},
+        "invocation": {"module_args": {"serial": "Q234-ABCD-5678"}},
         "meraki_response": {"addresses": [{"address": "2001:db8::1"}]},
     }
     results = jq.compile(query_data[module_fqcn]["query"]).input(response).all()

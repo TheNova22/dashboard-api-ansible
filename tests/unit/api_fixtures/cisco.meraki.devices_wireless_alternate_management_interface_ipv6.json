@@ -1,5 +1,5 @@
 {
-  "invocation": {"serial": "Q2FV-DJ6J-4QHD"},
+  "invocation": {"module_args": {"serial": "Q2FV-DJ6J-4QHD"}},
   "meraki_response": {
     "addresses": [
       {
